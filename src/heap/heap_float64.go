@@ -9,23 +9,23 @@ type HeapItemFloat64 struct {
 
 type MinHeapFloat64 struct {
 	items		[]HeapItemFloat64
-	labels  	map[string]int
-	Size		int
+	labels  	map[string]int64
+	Size		int64
 }
 
 func MakeMinHeapFloat64() *MinHeapFloat64 {
 	h := &MinHeapFloat64{}
 	h.items = make([]HeapItemFloat64, 0)
-	h.labels = make(map[string]int)
+	h.labels = make(map[string]int64)
 	return h
 }
 
 func (h *MinHeapFloat64) Init() {
 	h.items = make([]HeapItemFloat64, 0)
-	h.labels = make(map[string]int)
+	h.labels = make(map[string]int64)
 }
 
-func (h *MinHeapFloat64) MinHeapifyUp(c int) {
+func (h *MinHeapFloat64) MinHeapifyUp(c int64) {
 	if c == 0 {
 		return
 	}
@@ -39,7 +39,7 @@ func (h *MinHeapFloat64) MinHeapifyUp(c int) {
 	}
 }
 
-func (h *MinHeapFloat64) MinHeapifyDown(p int) {
+func (h *MinHeapFloat64) MinHeapifyDown(p int64) {
 	if p >= h.Size {
 		return
 	}
@@ -55,7 +55,7 @@ func (h *MinHeapFloat64) MinHeapifyDown(p int) {
 	}
 
 	// set child pointer
-	var c int
+	var c int64
 	if h.items[r].key > h.items[l].key {
 		c = l
 	} else {
@@ -106,7 +106,7 @@ func (h *MinHeapFloat64) ChangeKey(label string, key float64) {
 	}
 }
 
-func (h *MinHeapFloat64) Swap(i int, j int) {
+func (h *MinHeapFloat64) Swap(i int64, j int64) {
 	temp := h.items[i]
 	h.items[i] = h.items[j]
 	h.items[j] = temp

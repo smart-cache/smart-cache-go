@@ -5,6 +5,7 @@ import (
 )
 
 const CACHE_SIZE = 20
+const PREFETCH_SIZE = 10
 
 //const SEED = time.Now().UnixNano()
 const SEED = 1
