@@ -64,6 +64,22 @@ func (d *DataStore) Get(filename string) (config.DataType, bool) {
     return data, ok
 }
 
+func (d *DataStore) GetBatch(filenames []string) ([]config.DataType, bool) {
+    time.Sleep(config.DATA_FETCH_TIME + config.DATA_COST_TIME * time.Duration(len(filenames)))
+    d.mu.Lock()
+	defer d.mu.Unlock()
+	files := make([]config.DataType, len(filenames))
+	valid := true
+	for i, name := range filenames {
+		file, ok := d.data[name]
+		valid = valid && ok
+		files[i] = file
+	}
+    d.calls++
+    // approx time of fetching from underlying datastore
+    return files, valid
+}
+
 func (d *DataStore) Make(filename string, content config.DataType) {
     d.mu.Lock()
     defer d.mu.Unlock()

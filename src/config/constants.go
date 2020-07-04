@@ -1,7 +1,7 @@
 package config
 
 import (
-	// "time"
+	"time"
 )
 
 const CACHE_SIZE = 20
@@ -13,11 +13,10 @@ type CacheType int
 
 const (
 	LRU            CacheType = 0
-	MarkovPrefetch CacheType = 1
-	MarkovEviction CacheType = 2
-	MarkovBoth     CacheType = 3
+	Prefetcher
 )
 
 type DataType string
 
-const DATA_FETCH_TIME = 10
+const DATA_FETCH_TIME = time.Millisecond * 10
+const DATA_COST_TIME = time.Millisecond * 1
