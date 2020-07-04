@@ -2,23 +2,30 @@ package heap
 
 // this file was copied from smart-cache-824project
 
-type HeapItemFloat struct {
+type HeapItemFloat64 struct {
 	label	string
 	key	    float64
 }
 
-type MinHeapFloat struct {
-	items		[]HeapItemFloat
+type MinHeapFloat64 struct {
+	items		[]HeapItemFloat64
 	labels  	map[string]int
 	Size		int
 }
 
-func (h *MinHeapFloat) Init() {
-	h.items = make([]HeapItemFloat, 0)
+func MakeMinHeapFloat64() *MinHeapFloat64 {
+	h := &MinHeapFloat64{}
+	h.items = make([]HeapItemFloat64, 0)
+	h.labels = make(map[string]int)
+	return h
+}
+
+func (h *MinHeapFloat64) Init() {
+	h.items = make([]HeapItemFloat64, 0)
 	h.labels = make(map[string]int)
 }
 
-func (h *MinHeapFloat) MinHeapifyUp(c int) {
+func (h *MinHeapFloat64) MinHeapifyUp(c int) {
 	if c == 0 {
 		return
 	}
@@ -32,7 +39,7 @@ func (h *MinHeapFloat) MinHeapifyUp(c int) {
 	}
 }
 
-func (h *MinHeapFloat) MinHeapifyDown(p int) {
+func (h *MinHeapFloat64) MinHeapifyDown(p int) {
 	if p >= h.Size {
 		return
 	}
@@ -64,8 +71,8 @@ func (h *MinHeapFloat) MinHeapifyDown(p int) {
 	}
 }
 
-func (h *MinHeapFloat) Insert(label string, key float64) {
-	var i HeapItemFloat
+func (h *MinHeapFloat64) Insert(label string, key float64) {
+	var i HeapItemFloat64
 	i.label = label
 	i.key = key
 	h.items = append(h.items, i)
@@ -74,7 +81,7 @@ func (h *MinHeapFloat) Insert(label string, key float64) {
 	h.MinHeapifyUp(h.labels[label])
 }
 
-func (h *MinHeapFloat) ExtractMin() string {
+func (h *MinHeapFloat64) ExtractMin() string {
 	// swap first and last terms
 	h.Swap(0, h.Size - 1)
 	h.labels[h.items[0].label] = 0
@@ -86,7 +93,7 @@ func (h *MinHeapFloat) ExtractMin() string {
 	return label
 }
 
-func (h *MinHeapFloat) ChangeKey(label string, key float64) {
+func (h *MinHeapFloat64) ChangeKey(label string, key float64) {
 	index, ok := h.labels[label]
 	if ok {
 		if key < h.items[index].key {
@@ -99,18 +106,18 @@ func (h *MinHeapFloat) ChangeKey(label string, key float64) {
 	}
 }
 
-func (h *MinHeapFloat) Swap(i int, j int) {
+func (h *MinHeapFloat64) Swap(i int, j int) {
 	temp := h.items[i]
 	h.items[i] = h.items[j]
 	h.items[j] = temp
 }
 
-func (h *MinHeapFloat) Contains(key string) bool {
+func (h *MinHeapFloat64) Contains(key string) bool {
 	_, ok := h.labels[key]
 	return ok
 }
 
-func (h *MinHeapFloat) GetKeyList() []string {
+func (h *MinHeapFloat64) GetKeyList() []string {
 	li := make([]string, len(h.items))
 	for i, v := range h.items {
 		li[i] = v.label
@@ -118,7 +125,7 @@ func (h *MinHeapFloat) GetKeyList() []string {
 	return li
 }
 
-func (h *MinHeapFloat) GetKey(name string) float64 {
+func (h *MinHeapFloat64) GetKey(name string) float64 {
 	index, ok := h.labels[name]
 	if ok {
 		return h.items[index].key
