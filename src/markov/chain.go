@@ -74,8 +74,7 @@ func (m *MarkovChain) longPaths(source string, n int) []string {
 	nRemoved := 0
 
 	// store current guesses
-	var queue heap.MinHeapFloat
-	queue.Init()
+	queue := heap.MakeMinHeapFloat64()
 
 	// relax all edges from source
 	src_node, ok := m.nodes[source]
