@@ -59,7 +59,7 @@ func MakeCache(id int, cacheSize int64, cacheType config.CacheType, data *datast
 	return cache
 }
 
-func (cache *Cache) Fetch(filename string) (config.DataType, error) {
+func (cache *Cache) Fetch(filename string, clientID int) (config.DataType, error) {
 	cache.mu.Lock()
 	defer cache.mu.Unlock()
 
@@ -67,7 +67,7 @@ func (cache *Cache) Fetch(filename string) (config.DataType, error) {
 	cache.timestamp++
 
 	// inform the markov chain of this transaction
-	cache.chain.RecordTransition(filename, cache.id)
+	cache.chain.RecordTransition(filename, clientID)
 	// and inform the heap
 	cache.heap.ChangeKey(filename, cache.timestamp)
 
