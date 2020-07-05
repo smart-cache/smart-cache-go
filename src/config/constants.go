@@ -13,8 +13,8 @@ const SEED = 1
 type CacheType int
 
 const (
-	LRU            CacheType = 0
-	Prefetcher
+	LRU            	CacheType = 0
+	Markov			CacheType = 1
 )
 
 type DataType string
