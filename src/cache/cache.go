@@ -13,13 +13,14 @@ import (
 
 /********************************
 Cache supports the following external API to users
-c.Init(cacheSize int, cacheType CacheType, data *datastore.DataStore)
-	Initializes a cache with eviction policy and prefetch defined by cache type
+MakeCache(id int, cacheSize int64, cacheType config.CacheType, data *datastore.DataStore) (* Cache)
+	Initializes a cache with the given policy (LRU or Markov)
 	Copies underlying datastore
-c.Report() (hits, misses)
-    Get a report of the hits and misses  TODO: Do we want a version number or
-    timestamp mechanism of any form here?
-c.Fetch(name string) (config.DataType, error)
+c.Report() (hits, misses, callsToDatastore)
+	Get a report of the hits, misses, and total calls to the underlying datastore
+	TODO: Do we want a version number or timestamp mechanism of any form here?
+c.Fetch(filename string, clientID int) (config.DataType, error)
+	Specific client requests the `filename` file
 *********************************/
 type Cache struct {
 	mu          sync.Mutex          			// Lock to protect shared access to cache

@@ -101,8 +101,8 @@ func TestBasicLRUSuccess(t *testing.T) {
 	}
 }
 
-func TestBasicMarkovFail(t *testing.T) {
-	fmt.Printf("TestBasicMarkovFail ...\n")
+func TestBasicMarkovSequential(t *testing.T) {
+	fmt.Printf("TestBasicMarkovSequential ...\n")
 	failed := false
 
 	data := datastore.MakeDataStore()
