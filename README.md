@@ -1,9 +1,6 @@
 # smart-cache-go
 Smart-cache: Pre-fetching in Distributed Caching (Golang)
 
-# smart-cache-go
-Smart-cache: Pre-fetching in Distributed Caching (Golang)
-
 This project started as a [6.824](https://pdos.csail.mit.edu/6.824/) final [project](https://github.com/rootjalex/smart-cache-824project). It is a smart caching system for used in large, distributed databases when useful patterns are identifiable in the data accesses.
 
 
